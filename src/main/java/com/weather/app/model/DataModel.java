@@ -1,12 +1,12 @@
 package com.weather.app.model;
+import java.io.Serializable;
 
-public class DataModel {
+public class DataModel implements Serializable {
 
 	private int record_sign_amount;
 	private String weather_station_id;
 	private String ncei_weather_station_id;
 	private String observation_date;
-	private String observation_time;
 	private String data_source_flag;
 	private String latitude_coordinate;
 	private String longitude_coordinate;
@@ -69,14 +69,6 @@ public class DataModel {
 
 	public void setObservation_date(String observation_date) {
 		this.observation_date = observation_date;
-	}
-
-	public String getObservation_time() {
-		return observation_time;
-	}
-
-	public void setObservation_time(String observation_time) {
-		this.observation_time = observation_time;
 	}
 
 	public String getData_source_flag() {
