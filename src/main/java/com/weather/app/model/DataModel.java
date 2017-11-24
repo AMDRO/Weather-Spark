@@ -1,4 +1,5 @@
 package com.weather.app.model;
+
 import java.io.Serializable;
 
 public class DataModel implements Serializable {
@@ -17,7 +18,7 @@ public class DataModel implements Serializable {
 	private String quality_control_process;
 	private String wind_obs_direction_angle;
 	private String wind_obs_direction_quality_code;
-	private String wind_obs_direction_type_code;
+	private String wind_obs_type_code;
 	private String wind_obs_speed_rate;
 	private String wind_obs_speed_quality_code;
 	private String sky_cond_obs_ceiling_height; // cond = condition
@@ -36,9 +37,7 @@ public class DataModel implements Serializable {
 	private String atmo_pres_obs_sea_level_pres; // atmo = atmospheric, pres = pressure
 
 	private String atmo_pres_obs_sea_level_pres_obs_quality_code;
-	private String additional_data;
 
-	
 	public int getRecord_sign_amount() {
 		return record_sign_amount;
 	}
@@ -143,12 +142,12 @@ public class DataModel implements Serializable {
 		this.wind_obs_direction_quality_code = wind_obs_direction_quality_code;
 	}
 
-	public String getWind_obs_direction_type_code() {
-		return wind_obs_direction_type_code;
+	public String getWind_obs_type_code() {
+		return wind_obs_type_code;
 	}
 
-	public void setWind_obs_direction_type_code(String wind_obs_direction_type_code) {
-		this.wind_obs_direction_type_code = wind_obs_direction_type_code;
+	public void setWind_obs_type_code(String wind_obs_type_code) {
+		this.wind_obs_type_code = wind_obs_type_code;
 	}
 
 	public String getWind_obs_speed_rate() {
@@ -278,13 +277,4 @@ public class DataModel implements Serializable {
 	public void setAtmo_pres_obs_sea_level_pres_obs_quality_code(String atmo_pres_obs_sea_level_pres_obs_quality_code) {
 		this.atmo_pres_obs_sea_level_pres_obs_quality_code = atmo_pres_obs_sea_level_pres_obs_quality_code;
 	}
-
-	public String getAdditional_data() {
-		return additional_data;
-	}
-
-	public void setAdditional_data(String additional_data) {
-		this.additional_data = additional_data;
-	}
-
 }
