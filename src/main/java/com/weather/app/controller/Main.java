@@ -1,3 +1,5 @@
+package com.weather.app.controller;
+
 import org.apache.spark.api.java.*;
 import org.apache.spark.api.java.function.Function;
 
@@ -19,7 +21,7 @@ public class Main {
 		JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("Spark Count").setMaster("local"));
 
 		// create RDD - load weather data from file and create RDD<String>
-		JavaRDD<String> weatherDataRDD = sc.textFile("C:\\Users\\Alicja\\Desktop\\007070-99999-2015");
+		JavaRDD<String> weatherDataRDD = sc.textFile("C:\\Users\\Alicja\\Desktop\\weatherData\\*\\*");
 
 		// count rows in RDD
 		long count = weatherDataRDD.count();
@@ -180,7 +182,6 @@ public class Main {
 			}
 		});
 
-		// new RDD also has 198 ROWS
 		System.out.println("After changing to data model: " + modelDataRDD.count());
 	}
 }
