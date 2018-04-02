@@ -17,20 +17,15 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.setProperty("hadoop.home.dir", "C:\\Users\\Alicja\\winutils\\");
-
 		SparkSession sc = SparkSession.builder().appName("Spark count").master("local")
 				.config("spark.some.config.option", "some-value").getOrCreate();
 
 		// create RDD - load weather data from file and create RDD<String>
-		JavaRDD<DataModel> weatherRDD = sc.read().textFile("E:\\weatherData\\*\\*").javaRDD()
-				.map(new Function<String, DataModel>() {
+		JavaRDD<DataModel> weatherRDD = sc.read().textFile("/Users/user/Documents/GitHub/Weather-Spark/weatherData/*")
+				.javaRDD().map(new Function<String, DataModel>() {
 
-					@Override
 					public DataModel call(String row) throws Exception {
-
 						DataModel dataModel = new DataModel();
-
 						int rowLength = Integer.valueOf(row.substring(0, 4)) + 105;
 						dataModel.setRecord_sign_amount(rowLength);
 
@@ -129,52 +124,9 @@ public class Main {
 						return dataModel;
 					}
 				});
-
 		System.out.println("There is : " + weatherRDD.count() + " rows");
 		Dataset<Row> weatherDF = sc.createDataFrame(weatherRDD, DataModel.class);
 		System.out.println("After changing to DataFrame: " + weatherDF.count());
-
 		weatherDF.describe().show();
 	}
 }
-
-/*
- * public static void main(String[] args) { // TODO Auto-generated method stub
- * 
- * System.setProperty("hadoop.home.dir", "C:\\Users\\Alicja\\winutils\\");
- * 
- * // create Spark context with Spark configuration JavaSparkContext sc = new
- * JavaSparkContext(new
- * SparkConf().setAppName("Spark Count").setMaster("local"));
- * 
- * 
- * //basic example JavaRDD<String> textFile =
- * sc.textFile("C:\\Users\\Alicja\\Desktop\\example.txt"); JavaPairRDD<String,
- * Integer> counts = textFile.flatMap(s ->
- * Arrays.asList(s.split(" ")).iterator()) .mapToPair(word -> new Tuple2<>(word,
- * 1)).reduceByKey((a, b) -> a + b);
- * counts.saveAsTextFile("C:\\Users\\Alicja\\Desktop\\example2.txt");
- * counts.foreach(data -> { System.out.println("word= " + data._1() + " " +
- * " occurance= " + data._2()); });
- * 
- * 
- * // create RDD JavaRDD<String> weatherData =
- * sc.textFile("C:\\Users\\Alicja\\Desktop\\readLine.txt");
- * 
- * String schemaString = "id color thing";
- * 
- * // generate the schema based on the string of schema List<StructField> fields
- * = new ArrayList<>(); for (String fieldName : schemaString.split(" ")) {
- * StructField field = DataTypes.createStructField(fieldName,
- * DataTypes.StringType, true); fields.add(field); }
- * 
- * StructType schema = DataTypes.createStructType(fields);
- * 
- * JavaRDD<Row> rowRDD = weatherData.map(new Function<String, Row>() {
- * 
- * @Override public Row call(String record) throws Exception { String[]
- * attributes = record.split(","); return RowFactory.create(attributes[0],
- * attributes[1].trim()); } });
- * 
- * }
- */
